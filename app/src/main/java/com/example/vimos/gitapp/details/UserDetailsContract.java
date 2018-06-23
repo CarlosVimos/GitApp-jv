@@ -1,23 +1,22 @@
-package com.example.vimos.gitapp.search;
-
-import android.view.View;
+package com.example.vimos.gitapp.details;
 
 import com.example.vimos.gitapp.BasePresenter;
 import com.example.vimos.gitapp.BaseView;
+import com.example.vimos.gitapp.model.Repository;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.util.OnViewClickListener;
 
 import java.util.List;
 
 /**
- * Created by Vimos on 20/06/2018.
+ * Created by Vimos on 23/06/2018.
  */
 
-public interface SearchContract {
+public interface UserDetailsContract {
 
-    interface View extends BaseView<Presenter> {
+    interface View extends BaseView<UserDetailsContract.Presenter> {
 
-        void showUsers(List<User> users, boolean insert);
+        void showRepos(List<Repository> repos, boolean insert);
 
         void updateItem(int position);
 
@@ -25,15 +24,13 @@ public interface SearchContract {
 
         void setLoading(boolean show);
 
-        void itemClickedInfo(User user, android.view.View view);
-
     }
 
     interface Presenter extends BasePresenter, OnViewClickListener<User> {
 
-        void setQueryFilter(String query);
+        void setUsername(String username);
 
-        void loadUsers();
+        void loadRepos();
 
         void loadMore();
 

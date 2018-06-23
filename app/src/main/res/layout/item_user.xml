@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/content"
+    android:layout_width="match_parent"
+    android:background="@drawable/shape_rectangle"
+    android:layout_height="50dp"
+    android:paddingEnd="@dimen/padding_avg"
+    android:paddingStart="@dimen/padding_avg"
+    android:paddingTop="@dimen/padding_small"
+    android:clickable="true"
+    android:focusable="true"
+    >
+
+        <TextView
+            android:id="@+id/username_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="15dp"
+            android:text="carlos"
+            android:textColor="#2030dc"
+            />
+
+    <android.support.v4.widget.Space
+        android:layout_width="@dimen/space_avg"
+        android:layout_height="wrap_content"
+        />
+
+</RelativeLayout>

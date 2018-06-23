@@ -1,6 +1,7 @@
 package com.example.vimos.gitapp.network;
 
-import com.example.vimos.gitapp.Repository;
+import com.example.vimos.gitapp.model.Repository;
+import com.example.vimos.gitapp.model.RepositoryList;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.model.UsersList;
 
@@ -17,13 +18,15 @@ import retrofit2.http.Query;
 
 public interface UserService {
 
-    @GET("/search/users?per_page=2")
+    @GET("/search/users?per_page=100")
     Observable<UsersList> searchUsers(
             @Query("q") String searchTerm
     );
 
     @GET("users/{user}/repos")
-    Observable<List<Repository>> listRepos(@Path("user") String user);
+    Observable<List<RepositoryList>> getUserRepos(
+            @Path("user") String user
+    );
 
     @GET("/users/{username}")
     Observable<User> getUser(String username);
