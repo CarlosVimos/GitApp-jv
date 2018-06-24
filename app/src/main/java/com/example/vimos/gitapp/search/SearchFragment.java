@@ -6,7 +6,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,14 +36,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     private RecyclerViewScrollListener scrollListener;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
- //   @BindView(R.id.list_user)
-    RecyclerView recyclerView;
-
-//    @BindView(R.id.search_user)
-    EditText search;
-
-//    @BindView(R.id.swipe_refresh_layout)
-    SwipeRefreshLayout swipeRefreshLayout;
+    private RecyclerView recyclerView;
+    private EditText search;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -106,12 +100,9 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     public void showUsers(List<User> list, boolean insert) {
         if (insert) {
             adapter.notifyDataSetChanged();
- //           adapter.getDataSet().clear();
             adapter.getDataSet().addAll(list);
-      //      adapter.notifyItemChanged(list.size()-1);
             int insertStart = adapter.getDataSet().size();
             int size = list.size();
-          //  adapter.getDataSet().addAll(list);
             adapter.notifyItemRangeInserted(insertStart, size);
         } else {
             adapter.setDataSet(list);
@@ -119,18 +110,8 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
         }
         scrollListener.setLoading(true);
 
-
     }
 
-    @Override
-    public void updateItem(int position) {
-        adapter.notifyItemChanged(position);
-    }
-
-    @Override
-    public void updateItem(User product) {
-
-    }
 
     @Override
     public void setLoading(boolean show) {

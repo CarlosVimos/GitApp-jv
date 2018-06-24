@@ -1,7 +1,5 @@
 package com.example.vimos.gitapp.search;
 
-import android.view.View;
-
 import com.example.vimos.gitapp.BasePresenter;
 import com.example.vimos.gitapp.BaseView;
 import com.example.vimos.gitapp.model.User;
@@ -18,10 +16,6 @@ public interface SearchContract {
     interface View extends BaseView<Presenter> {
 
         void showUsers(List<User> users, boolean insert);
-
-        void updateItem(int position);
-
-        void updateItem(User product);
 
         void setLoading(boolean show);
 

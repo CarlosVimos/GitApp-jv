@@ -16,8 +16,6 @@ import com.example.vimos.gitapp.util.Constants;
 
 public class UserDetailsActivity extends BaseActivity {
 
-    private UserDetailsPresenter presenter;
-    private UserDaoImpl userDao;
     private String username;
 
     public static void startActivity(Context context,
@@ -34,26 +32,13 @@ public class UserDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_user_details);
 
-        userDao = new UserDaoImpl();
-
         username = getIntent().getExtras().getString(Constants.USERNAME);
-
-        UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
- //       userDetailsFragment = ActivityUtils.createAndAddFragment(R.id.fragment_container, UserDetailsFragment.class, this);
-
-
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container_details,
                 UserDetailsFragment.newInstance(username),
                 UserDetailsFragment.class.getSimpleName());
         fragmentTransaction.commit();
-
-
-//        presenter = new UserDetailsPresenter(
-//                userDetailsFragment,
-//                userDao
-//        );
 
 
     }

@@ -1,6 +1,5 @@
 package com.example.vimos.gitapp.details;
 
-import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,19 +11,14 @@ import android.widget.Toast;
 
 import com.example.vimos.gitapp.R;
 import com.example.vimos.gitapp.model.Repository;
-import com.example.vimos.gitapp.model.RepositoryList;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.model.dao.UserDaoImpl;
 import com.example.vimos.gitapp.util.Constants;
-import com.jakewharton.rxbinding2.widget.RxTextView;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import butterknife.ButterKnife;
-import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.schedulers.Schedulers;
 
 
 /**

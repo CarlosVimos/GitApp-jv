@@ -2,7 +2,7 @@ package com.example.vimos.gitapp.details;
 
 import android.view.View;
 
-import com.example.vimos.gitapp.model.RepositoryList;
+import com.example.vimos.gitapp.model.Repository;
 import com.example.vimos.gitapp.model.SimpleError;
 import com.example.vimos.gitapp.model.dao.UserDao;
 import com.example.vimos.gitapp.network.RetrofitException;
@@ -18,10 +18,6 @@ import timber.log.Timber;
 
 public class UserDetailsPresenter implements UserDetailsContract.Presenter {
 
-    public static final String TAG = UserDetailsPresenter.class.getSimpleName();
-
-    private static final int ON_PAGE = 10;
-    private int offset = 0;
     private String username;
 
     private UserDao userDAO;
@@ -53,6 +49,8 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
     public void loadRepos() {
 
         view.setLoading(true);
+
+        //TODO proper request to repository of Github API
 
         compositeDisposable.add(
                 userDAO.getRepos(username)
@@ -88,7 +86,7 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
     }
 
     @Override
-    public void onItemClick(RepositoryList item, int position, View v) {
+    public void onItemClick(Repository item, int position, View v) {
 
     }
 }

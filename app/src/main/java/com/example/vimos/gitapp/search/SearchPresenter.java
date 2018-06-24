@@ -1,6 +1,5 @@
 package com.example.vimos.gitapp.search;
 
-import android.util.Log;
 import android.view.View;
 
 import com.example.vimos.gitapp.model.SimpleError;
@@ -111,6 +110,11 @@ public class SearchPresenter implements SearchContract.Presenter {
 
     @Override
     public void stop() {
+        if (compositeDisposable != null) {
+            compositeDisposable.dispose();
+            compositeDisposable.clear();
+            compositeDisposable = null;
+        }
 
     }
 }

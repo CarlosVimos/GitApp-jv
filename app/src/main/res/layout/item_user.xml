@@ -7,7 +7,7 @@
     android:layout_height="50dp"
     android:paddingEnd="@dimen/padding_avg"
     android:paddingStart="@dimen/padding_avg"
-    android:paddingTop="@dimen/padding_small"
+    android:layout_marginTop="@dimen/padding_small"
     android:clickable="true"
     android:focusable="true"
     >
@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:layout_marginStart="15dp"
             android:text="carlos"
-            android:textColor="#2030dc"
+            android:textColor="#FFF"
             />
 
     <android.support.v4.widget.Space

@@ -1,7 +1,6 @@
 package com.example.vimos.gitapp.model.dao;
 
 import com.example.vimos.gitapp.model.Repository;
-import com.example.vimos.gitapp.model.RepositoryList;
 import com.example.vimos.gitapp.model.UsersList;
 
 import java.util.List;
