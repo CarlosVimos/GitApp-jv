@@ -1,8 +1,12 @@
 package com.example.vimos.gitapp.model.dao;
 
+import com.example.vimos.gitapp.model.Repository;
 import com.example.vimos.gitapp.model.RepositoryList;
+import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.model.UsersList;
 import com.example.vimos.gitapp.network.UserService;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -15,7 +19,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class UserDaoImpl implements UserDao {
 
-    private UserService userService;
 
     private static final class Handler {
         static final UserDaoImpl INSTANCE = new UserDaoImpl();
@@ -31,20 +34,16 @@ public class UserDaoImpl implements UserDao {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-//    @Override
-//    public void init(UserService userService) {
-//        this.userService = userService;
-//    }
 
     @Override
-    public Observable<UsersList> searchUsers(final String searchTerm) {
+    public Observable<UsersList> searchUsers(final String searchTerm, final String nextPage) {
 
         final UserService us = retrofit.create(UserService.class);
-        return us.searchUsers(searchTerm);
+        return us.searchUsers(searchTerm, nextPage);
     }
 
     @Override
-    public Observable<RepositoryList> getRepos(String username) {
+    public Observable<List<Repository>> getRepos(String username) {
 
         final UserService us = retrofit.create(UserService.class);
         return us.getUserRepos(username);

@@ -18,6 +18,7 @@ public class UserDetailsActivity extends BaseActivity {
 
     private UserDetailsPresenter presenter;
     private UserDaoImpl userDao;
+    private String username;
 
     public static void startActivity(Context context,
                                      String username) {
@@ -35,23 +36,24 @@ public class UserDetailsActivity extends BaseActivity {
 
         userDao = new UserDaoImpl();
 
+        username = getIntent().getExtras().getString(Constants.USERNAME);
+
         UserDetailsFragment userDetailsFragment = new UserDetailsFragment();
  //       userDetailsFragment = ActivityUtils.createAndAddFragment(R.id.fragment_container, UserDetailsFragment.class, this);
 
 
-        Toast.makeText(this, getIntent().getExtras().getString(Constants.USERNAME), Toast.LENGTH_SHORT).show();
 
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container_details,
-                UserDetailsFragment.newInstance(getIntent().getExtras().getString(Constants.USERNAME)),
+                UserDetailsFragment.newInstance(username),
                 UserDetailsFragment.class.getSimpleName());
         fragmentTransaction.commit();
 
 
-        presenter = new UserDetailsPresenter(
-                userDetailsFragment,
-                userDao
-        );
+//        presenter = new UserDetailsPresenter(
+//                userDetailsFragment,
+//                userDao
+//        );
 
 
     }

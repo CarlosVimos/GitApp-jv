@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 /**
  * Created by Vimos on 23/06/2018.
  */
@@ -12,23 +14,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class RepositoryList {
 
-    @JsonProperty("name")
-    private String name;
+    private List<Repository> repositoryList;
 
-    @JsonProperty("full_name")
-    private String fullName;
 
-    public RepositoryList(final String repoName, final String repoFullName) {
-        this.name = repoName;
-        this.fullName = repoFullName;
+
+    public RepositoryList(final List<Repository> repositoryList) {
+        this.repositoryList = repositoryList;
     }
 
-
-    public String getName() {
-        return name;
-    }
-
-    public String getFullName() {
-        return fullName;
+    public List<Repository> getRepositoryList() {
+        return repositoryList;
     }
 }

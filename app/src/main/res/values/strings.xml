@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">GitApp</string>
     <string name="api_address" translatable="false">https://api.github.com/</string>
-    <string name="username">username</string>
+    <string name="username">search username…</string>
 </resources>

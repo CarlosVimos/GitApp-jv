@@ -1,7 +1,6 @@
 package com.example.vimos.gitapp.network;
 
 import com.example.vimos.gitapp.model.Repository;
-import com.example.vimos.gitapp.model.RepositoryList;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.model.UsersList;
 
@@ -9,6 +8,8 @@ import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
+import retrofit2.http.Headers;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
@@ -18,13 +19,14 @@ import retrofit2.http.Query;
 
 public interface UserService {
 
-    @GET("/search/users?per_page=100")
+    @GET("/search/users?")
     Observable<UsersList> searchUsers(
-            @Query("q") String searchTerm
+            @Query("q") String searchTerm,
+            @Query("page") String nextPage
     );
 
-    @GET("users/{user}/repos")
-    Observable<List<RepositoryList>> getUserRepos(
+    @GET("/users/{user}/repos")
+    Observable<List<Repository>> getUserRepos(
             @Path("user") String user
     );
 

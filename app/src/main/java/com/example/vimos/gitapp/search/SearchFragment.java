@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,15 +50,8 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
 
     @Nullable
     @Override
@@ -76,6 +70,15 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
 
+        recyclerView.addOnScrollListener(scrollListener = new RecyclerViewScrollListener() {
+            @Override
+            public void onEndReached() {
+                presenter.loadMore();
+            }
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(this);
+
         swipeRefreshLayout.setOnRefreshListener(this);
 
             compositeDisposable.add(
@@ -85,7 +88,10 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
                             .distinctUntilChanged()
                             .observeOn(AndroidSchedulers.mainThread())
                             .subscribeOn(Schedulers.computation())
-                            .subscribe(presenter::setQueryFilter)
+                            .subscribe(query -> {
+                                presenter.setQueryFilter(query);
+                                adapter.getDataSet().clear();
+                            })
             );
 
         return view;
@@ -99,14 +105,20 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     @Override
     public void showUsers(List<User> list, boolean insert) {
         if (insert) {
-            adapter.getDataSet().clear();
+            adapter.notifyDataSetChanged();
+ //           adapter.getDataSet().clear();
             adapter.getDataSet().addAll(list);
-            adapter.notifyItemChanged(list.size()-1);
+      //      adapter.notifyItemChanged(list.size()-1);
+            int insertStart = adapter.getDataSet().size();
+            int size = list.size();
+          //  adapter.getDataSet().addAll(list);
+            adapter.notifyItemRangeInserted(insertStart, size);
         } else {
             adapter.setDataSet(list);
             adapter.notifyDataSetChanged();
         }
         scrollListener.setLoading(true);
+
 
     }
 

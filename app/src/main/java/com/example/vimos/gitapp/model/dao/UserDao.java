@@ -1,9 +1,8 @@
 package com.example.vimos.gitapp.model.dao;
 
+import com.example.vimos.gitapp.model.Repository;
 import com.example.vimos.gitapp.model.RepositoryList;
-import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.model.UsersList;
-import com.example.vimos.gitapp.network.UserService;
 
 import java.util.List;
 
@@ -15,10 +14,8 @@ import io.reactivex.Observable;
 
 public interface UserDao {
 
-   // void init(UserService userService);
+    Observable<UsersList> searchUsers(String searchTerm, String nextPage);
 
-    Observable<UsersList> searchUsers(String searchTerm);
-
-    Observable<RepositoryList> getRepos(String username);
+    Observable<List<Repository>> getRepos(String username);
 
 }

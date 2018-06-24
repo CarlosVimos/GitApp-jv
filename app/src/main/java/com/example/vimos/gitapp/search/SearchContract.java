@@ -33,7 +33,7 @@ public interface SearchContract {
 
         void setQueryFilter(String query);
 
-        void loadUsers();
+        void loadUsers(final boolean insert);
 
         void loadMore();
 

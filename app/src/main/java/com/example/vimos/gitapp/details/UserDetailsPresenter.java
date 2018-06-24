@@ -1,10 +1,11 @@
 package com.example.vimos.gitapp.details;
 
-import android.util.Log;
 import android.view.View;
 
-import com.example.vimos.gitapp.model.User;
+import com.example.vimos.gitapp.model.RepositoryList;
+import com.example.vimos.gitapp.model.SimpleError;
 import com.example.vimos.gitapp.model.dao.UserDao;
+import com.example.vimos.gitapp.network.RetrofitException;
 
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -16,6 +17,8 @@ import timber.log.Timber;
  */
 
 public class UserDetailsPresenter implements UserDetailsContract.Presenter {
+
+    public static final String TAG = UserDetailsPresenter.class.getSimpleName();
 
     private static final int ON_PAGE = 10;
     private int offset = 0;
@@ -39,14 +42,10 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
     }
 
     @Override
-    public void onItemClick(User item, int position, View v) {
-
-    }
-
-    @Override
     public void setUsername(String username) {
         if (username != null) {
             this.username = username;
+            loadRepos();
         }
     }
 
@@ -57,18 +56,21 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
 
         compositeDisposable.add(
                 userDAO.getRepos(username)
-                        .subscribeOn(Schedulers.computation())
+                        .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                response -> {
-                                    view.setLoading(false);
-                             //       view.showRepos(response.getName(), true);
-                               //     Timber.d("items: %s", response.getItems().size());
-                                //    Log.i("SearchPresenter", "query: " + query + ", Total items of users: " + response.getItems().size());
-                                },
+                                response -> view.setLoading(true),
                                 throwable -> {
-                                    Timber.d(throwable, "Cannot obtain list of users");
                                     view.setLoading(false);
+                                    if (throwable instanceof RetrofitException) {
+                                        RetrofitException e = ((RetrofitException) throwable);
+                                        try {
+                                            SimpleError errorMessage = e.getErrorBodyAs(SimpleError.class);
+                                            Timber.i(errorMessage.getMessage());
+                                        } catch (Exception exception) {
+                                            Timber.e(exception);
+                                        }
+                                    }
                                 }
                         )
         );
@@ -82,6 +84,11 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
 
     @Override
     public void stop() {
+
+    }
+
+    @Override
+    public void onItemClick(RepositoryList item, int position, View v) {
 
     }
 }

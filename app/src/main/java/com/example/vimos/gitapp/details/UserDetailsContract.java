@@ -3,6 +3,7 @@ package com.example.vimos.gitapp.details;
 import com.example.vimos.gitapp.BasePresenter;
 import com.example.vimos.gitapp.BaseView;
 import com.example.vimos.gitapp.model.Repository;
+import com.example.vimos.gitapp.model.RepositoryList;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.util.OnViewClickListener;
 
@@ -14,7 +15,7 @@ import java.util.List;
 
 public interface UserDetailsContract {
 
-    interface View extends BaseView<UserDetailsContract.Presenter> {
+    interface View extends BaseView<Presenter> {
 
         void showRepos(List<Repository> repos, boolean insert);
 
@@ -26,7 +27,7 @@ public interface UserDetailsContract {
 
     }
 
-    interface Presenter extends BasePresenter, OnViewClickListener<User> {
+    interface Presenter extends BasePresenter, OnViewClickListener<RepositoryList> {
 
         void setUsername(String username);
 
