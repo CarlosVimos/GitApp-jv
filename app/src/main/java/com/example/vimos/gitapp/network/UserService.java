@@ -25,7 +25,7 @@ public interface UserService {
             @Query("page") String nextPage
     );
 
-    @GET("/users/{user}/repos")
+    @GET("/users/:{user}/repos")
     Observable<List<Repository>> getUserRepos(
             @Path("user") String user
     );

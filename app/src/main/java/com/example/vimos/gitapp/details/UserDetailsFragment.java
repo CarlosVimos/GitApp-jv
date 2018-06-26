@@ -28,8 +28,9 @@ import io.reactivex.disposables.CompositeDisposable;
 public class UserDetailsFragment extends Fragment implements UserDetailsContract.View, SwipeRefreshLayout.OnRefreshListener {
 
     private UserDetailsContract.Presenter presenter;
-    private String username;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+   private String username;
 
 
     public static UserDetailsFragment newInstance(String username) {

@@ -12,6 +12,7 @@ import com.example.vimos.gitapp.R;
 import com.example.vimos.gitapp.model.User;
 import com.example.vimos.gitapp.util.OnViewClickListener;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
@@ -21,7 +22,8 @@ import butterknife.OnClick;
 
 public class SearchHolder extends RecyclerView.ViewHolder {
 
-    private TextView username;
+    @BindView(R.id.username_id)
+    TextView username;
     private View itemUserLayout;
 
     protected User user;
@@ -31,7 +33,6 @@ public class SearchHolder extends RecyclerView.ViewHolder {
         super(itemView);
         ButterKnife.bind(this, itemView);
         itemUserLayout = itemView.findViewById(R.id.content);
-        username = itemView.findViewById(R.id.username_id);
 
     }
 

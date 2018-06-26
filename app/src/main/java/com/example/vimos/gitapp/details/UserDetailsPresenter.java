@@ -57,7 +57,10 @@ public class UserDetailsPresenter implements UserDetailsContract.Presenter {
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(
-                                response -> view.setLoading(true),
+                                response -> {
+                                    view.setLoading(true);
+                                    Timber.d("items: %s", response.size());
+                                },
                                 throwable -> {
                                     view.setLoading(false);
                                     if (throwable instanceof RetrofitException) {

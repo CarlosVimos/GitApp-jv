@@ -20,6 +20,7 @@ import com.jakewharton.rxbinding2.widget.RxTextView;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
@@ -36,9 +37,12 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     private RecyclerViewScrollListener scrollListener;
     private CompositeDisposable compositeDisposable = new CompositeDisposable();
 
-    private RecyclerView recyclerView;
-    private EditText search;
-    private SwipeRefreshLayout swipeRefreshLayout;
+    @BindView(R.id.list_user)
+    RecyclerView recyclerView;
+    @BindView(R.id.search_user)
+    EditText search;
+    @BindView(R.id.swipe_refresh_layout)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -52,11 +56,6 @@ public class SearchFragment extends Fragment implements SearchContract.View, Swi
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_list, container, false);
         ButterKnife.bind(this, view);
-
-
-        recyclerView = view.findViewById(R.id.list_user);
-        swipeRefreshLayout = view.findViewById(R.id.swipe_refresh_layout);
-        search = view.findViewById(R.id.search_user);
 
         adapter = new SearchAdapter();
         adapter.setOnItemClickListener(presenter);
